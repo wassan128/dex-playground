@@ -1,6 +1,6 @@
 FROM golang:1.13-alpine
 
-RUN apk --update add wget && \
+RUN apk --update add --virtual build-dependencies gcc g++ make wget && \
     mkdir -p /tmp/src && \
     cd /tmp/src && \
     wget https://github.com/dexidp/dex/archive/v2.21.0.tar.gz && \
