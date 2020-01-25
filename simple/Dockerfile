@@ -6,5 +6,9 @@ RUN apk --update add --virtual build-dependencies gcc g++ make wget && \
     wget https://github.com/dexidp/dex/archive/v2.21.0.tar.gz && \
     tar -zxvf v2.21.0.tar.gz && \
     cd dex-2.21.0 && \
-    make release-binary
+    make release-binary && \
+    apk add --update ca-certificates openssl
 
+ADD config.yaml /config.yaml
+
+CMD ["./bin/dex", "serve", "/config.yaml"]
