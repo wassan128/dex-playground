@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  dex:
+    container_name: dex
+    build: ./dex
+    tty: true
+    volumes:
+      - "./config/config.yaml:/config.yaml"
