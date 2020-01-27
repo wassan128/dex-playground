@@ -7,3 +7,15 @@ services:
     tty: true
     volumes:
       - "./config/config.yaml:/config.yaml"
+
+  db:
+    build: ./db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: dummy
+      MYSQL_PASSWORD: dummy
+      MYSQL_ROOT_PASSWORD: rootdummy
+    ports:
+      - "3306:3306"
