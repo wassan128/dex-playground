@@ -10,6 +10,8 @@ issuer: http://127.0.0.1:5556/dex
 storage:
   type: mysql
   config:
+    host: db
+    port: 3306
     database: dex_db
     user: dummy
     password: dummy
