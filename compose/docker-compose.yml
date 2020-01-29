@@ -1,21 +1,32 @@
 version: '3'
 
 services:
-  dex:
-    build: "./dex"
-    container_name: "dex"
-    volumes:
-      - "./config/config.yaml:/config.yaml"
-
   db:
     build: "./db"
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: "sample_db"
+      MYSQL_DATABASE: "dex_db"
       MYSQL_USER: "dummy"
       MYSQL_PASSWORD: "dummy"
       MYSQL_ROOT_PASSWORD: "rootdummy"
+    volumes:
+      - ./sql/scripts:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    networks:
+      - my-network
 
+  dex:
+    build: "./dex"
+    container_name: "dex"
+    volumes:
+      - "./config/config.yaml:/config.yaml"
+    networks:
+      - my-network
+    depends_on:
+      - db
+
+networks:
+  my-network:
+    external: true
